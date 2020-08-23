@@ -1,0 +1,41 @@
+body{
+    display: flex;
+    justify-content: center;
+    background-color:rgb(194, 189, 189);
+    font-family: 'Poppins', sans-serif;
+}
+
+.main{
+    background-color:rgb(107, 123, 148);
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.title{
+    background-color:rgb(40, 64, 104);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 22px;
+    font-weight: 600;
+    height: 45px;
+}
+
+.table-div{
+    background-color:rgb(100, 139, 207);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* might delete later */
+.table{
+    display: inline-grid;
+    grid-template-columns: repeat(3,auto);
+    background-color: rgb(255, 255, 255);
+    height: 420px;
+    width: 100%;
+}
