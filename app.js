@@ -1,6 +1,8 @@
 let table = ['','','','','','','','',''];
+let emptyPositions = [0,1,2,3,4,5,6,7,8];
 let player1 = {selector: 'X', name: 'Player'};
 let player2 = {selector: 'O', name: 'PC'}
+let count = 0;// max: 9
 
 
 const blocks = document.querySelectorAll('.block')
@@ -8,25 +10,42 @@ const title = document.querySelector('.title');
 
 
 function selectBlock(player, blockSelected){
-    blockId = parseInt(blockSelected.id);
-    if (table[blockId] == ''){
-        table[blockId] = player.selector;
+    table[blockSelected] = player.selector;
+    count++;
+    emptyPositions.splice(emptyPositions.indexOf(blockSelected), 1)
+    console.log(table);
+    console.log(emptyPositions);
+}
+
+//not using Player2
+function computerPlay(){
+    if (emptyPositions.length){
+        let computerSelection = emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
+        console.log(computerSelection);
+        table[computerSelection] = 'O';
+        count++;
+        emptyPositions.splice(emptyPositions.indexOf(computerSelection), 1)
         console.log(table);
     }
 }
 
+
 function clearTable(){
-    table.forEach( (block) =>{
-        block = '';
-    })
+    console.log('cleaning');
+    table = ['','','','','','','','',''];
+    count = 0;
+    emptyPositions = [0,1,2,3,4,5,6,7,8];
 }
 
 
 
 blocks.forEach( (block) =>{
     block.addEventListener('click', ()=> {
-        console.log(block.id);
-        selectBlock(player1, block)
+        blockId = parseInt(block.id);
+        if (table[blockId] == '' && count < 9){
+            selectBlock(player1, blockId);
+            computerPlay();
+        }
     })
 })
 
@@ -36,9 +55,12 @@ title.addEventListener('click', clearTable);
 
 
 
+/*
+Add functionalities to divs
+change title event listener to github
+add clear button
 
-
-
+*/
 
 
 
