@@ -1,3 +1,53 @@
+let table = ['','','','','','','','',''];
+let player1 = {selector: 'X', name: 'Player'};
+let player2 = {selector: 'O', name: 'PC'}
+
+
+const blocks = document.querySelectorAll('.block')
+const title = document.querySelector('.title');
+
+
+function selectBlock(player, blockSelected){
+    blockId = parseInt(blockSelected.id);
+    if (table[blockId] == ''){
+        table[blockId] = player.selector;
+        console.log(table);
+    }
+}
+
+function clearTable(){
+    table.forEach( (block) =>{
+        block = '';
+    })
+}
+
+
+
+blocks.forEach( (block) =>{
+    block.addEventListener('click', ()=> {
+        console.log(block.id);
+        selectBlock(player1, block)
+    })
+})
+
+
+title.addEventListener('click', clearTable);
+
+
+
+
+
+
+
+
+
+
+
+
+// Change to Object oriented after it works
+
+
+
 const player = (selector, name) =>{
     
     const test = () => console.log(`Hello ${name}`);
@@ -5,13 +55,23 @@ const player = (selector, name) =>{
 }
 
 const game = (() =>{
-    let player1 = player('x', 'Seba')
-    let player2 = player('x', 'Pc')
+    let player1 = player('x', 'Seba');
+    let player2 = player('O', 'Pc');
+    let table = ['','','','','','','','',''];
 
-    return {player1, player2}
-})
+    const printTable = () => console.log(table);
+
+    const setMark = (player, tablePosition) =>{
+        if (table[tablePosition] == '') {
+            console.log(xd);
+        }
+    }
+    const cleanTable = () => {}
+    const gamePlay = () =>{}
 
 
-let gamePlay = game();
+    return {player1, player2, gamePlay}
+})();
 
-console.log(gamePlay.player1, gamePlay.player2);// It works! :D
+
+// let gamePlay = game();
