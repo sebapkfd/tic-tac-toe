@@ -37,5 +37,9 @@ body{
     grid-template-columns: repeat(3,auto);
     background-color: rgb(255, 255, 255);
     height: 420px;
-    width: 100%;
+    width: 60%;
+}
+
+.block{
+    border: black solid;
 }
