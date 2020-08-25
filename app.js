@@ -5,15 +5,12 @@ let player2 = {selector: 'O', name: 'PC'}
 let count = 0;// max: 9
 let winner = null;
 
-
 const blocks = document.querySelectorAll('.block')
 const title = document.querySelector('.title');
 
-//It works, add other cases and break condition
 function check(){
     const xWin = 'X X X';
     const oWin = 'O O O';
-    // let aux = `${table[0]} ${table[1]} ${table[2]}`;
     let winCases = [
         `${table[0]} ${table[1]} ${table[2]}`,
         `${table[3]} ${table[4]} ${table[5]}`,
@@ -34,9 +31,7 @@ function check(){
             winner = 'PC'
             console.log('O win');
         }
-    })
-
-    
+    })    
 }
 
 function display(selector, block){
@@ -68,12 +63,16 @@ function computerPlay(){
 
 
 function clearTable(){
-    // Add cleaning of divs
     console.log('cleaning');
     table = ['','','','','','','','',''];
     count = 0;
     emptyPositions = [0,1,2,3,4,5,6,7,8];
     winner = null;
+    blocks.forEach((block)=>{
+        if (block.firstChild != null){
+            block.removeChild(block.firstChild)
+        }
+    })
 }
 
 
@@ -99,10 +98,7 @@ title.addEventListener('click', clearTable);
 /*
 footer
 add clear button
-Check win cases function
-    string cases win x + x + x and o + o + o
-    get win combinations -> string them
-    compare if some of them are equal, set game finished
+block size changing
 */
 
 // Change to Object oriented after it works
