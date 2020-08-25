@@ -8,16 +8,21 @@ let count = 0;// max: 9
 const blocks = document.querySelectorAll('.block')
 const title = document.querySelector('.title');
 
-
-function selectBlock(player, blockSelected){
-    table[blockSelected] = player.selector;
-    count++;
-    emptyPositions.splice(emptyPositions.indexOf(blockSelected), 1)
-    console.log(table);
-    console.log(emptyPositions);
+function display(selector, block){
+    let selectionDiv = document.createElement('div');
+    selectionDiv.setAttribute('class', 'blockSelected');
+    selectionDiv.textContent = selector;
+    block.appendChild(selectionDiv);
 }
 
-//not using Player2
+function selectBlock(player, blockSelected){
+    table[blockSelected.id] = player.selector;
+    count++;
+    emptyPositions.splice(emptyPositions.indexOf(parseInt(blockSelected.id)), 1)
+    display(player.selector, blockSelected);
+}
+
+//not using Player2 
 function computerPlay(){
     if (emptyPositions.length){
         let computerSelection = emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
@@ -25,12 +30,14 @@ function computerPlay(){
         table[computerSelection] = 'O';
         count++;
         emptyPositions.splice(emptyPositions.indexOf(computerSelection), 1)
-        console.log(table);
+        let blockDiv = document.getElementById(`${computerSelection}`);
+        display('O', blockDiv);
     }
 }
 
 
 function clearTable(){
+    // Add cleaning of divs
     console.log('cleaning');
     table = ['','','','','','','','',''];
     count = 0;
@@ -43,8 +50,9 @@ blocks.forEach( (block) =>{
     block.addEventListener('click', ()=> {
         blockId = parseInt(block.id);
         if (table[blockId] == '' && count < 9){
-            selectBlock(player1, blockId);
+            selectBlock(player1, block);
             computerPlay();
+            console.log(table);
         }
     })
 })
@@ -56,7 +64,7 @@ title.addEventListener('click', clearTable);
 
 
 /*
-Add functionalities to divs
+Add functionalities to div
 change title event listener to github
 add clear button
 
