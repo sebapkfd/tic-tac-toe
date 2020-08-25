@@ -3,10 +3,41 @@ let emptyPositions = [0,1,2,3,4,5,6,7,8];
 let player1 = {selector: 'X', name: 'Player'};
 let player2 = {selector: 'O', name: 'PC'}
 let count = 0;// max: 9
+let winner = null;
 
 
 const blocks = document.querySelectorAll('.block')
 const title = document.querySelector('.title');
+
+//It works, add other cases and break condition
+function check(){
+    const xWin = 'X X X';
+    const oWin = 'O O O';
+    // let aux = `${table[0]} ${table[1]} ${table[2]}`;
+    let winCases = [
+        `${table[0]} ${table[1]} ${table[2]}`,
+        `${table[3]} ${table[4]} ${table[5]}`,
+        `${table[6]} ${table[7]} ${table[8]}`,
+        `${table[0]} ${table[3]} ${table[6]}`,
+        `${table[1]} ${table[4]} ${table[7]}`,
+        `${table[2]} ${table[5]} ${table[8]}`,
+        `${table[0]} ${table[4]} ${table[8]}`,
+        `${table[2]} ${table[4]} ${table[6]}`,
+    ];
+
+    winCases.forEach((cases) => {
+        if (cases == xWin){
+            winner = 'Player'
+            console.log('X win');
+        }
+        else if(cases == oWin){
+            winner = 'PC'
+            console.log('O win');
+        }
+    })
+
+    
+}
 
 function display(selector, block){
     let selectionDiv = document.createElement('div');
@@ -42,6 +73,7 @@ function clearTable(){
     table = ['','','','','','','','',''];
     count = 0;
     emptyPositions = [0,1,2,3,4,5,6,7,8];
+    winner = null;
 }
 
 
@@ -49,10 +81,11 @@ function clearTable(){
 blocks.forEach( (block) =>{
     block.addEventListener('click', ()=> {
         blockId = parseInt(block.id);
-        if (table[blockId] == '' && count < 9){
+        if (table[blockId] == '' && count < 9 && winner == null){
             selectBlock(player1, block);
             computerPlay();
             console.log(table);
+            check();
         }
     })
 })
@@ -64,15 +97,13 @@ title.addEventListener('click', clearTable);
 
 
 /*
-Add functionalities to div
-change title event listener to github
+footer
 add clear button
-
+Check win cases function
+    string cases win x + x + x and o + o + o
+    get win combinations -> string them
+    compare if some of them are equal, set game finished
 */
-
-
-
-
 
 // Change to Object oriented after it works
 
