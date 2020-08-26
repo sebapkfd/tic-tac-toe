@@ -14,33 +14,56 @@ const clear = document.querySelector('#clearTable');
 function check(){
     const xWin = 'X X X';
     const oWin = 'O O O';
-    let winCases = [
-        `${table[0]} ${table[1]} ${table[2]}`,
-        `${table[3]} ${table[4]} ${table[5]}`,
-        `${table[6]} ${table[7]} ${table[8]}`,
-        `${table[0]} ${table[3]} ${table[6]}`,
-        `${table[1]} ${table[4]} ${table[7]}`,
-        `${table[2]} ${table[5]} ${table[8]}`,
-        `${table[0]} ${table[4]} ${table[8]}`,
-        `${table[2]} ${table[4]} ${table[6]}`,
-    ];
 
-    winCases.forEach((cases) => {
-        if (cases == xWin){
+    let AuxCases = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6]
+    ]
+
+    AuxCases.forEach((cases)=>{
+        let aux = `${table[cases[0]]} ${table[cases[1]]} ${table[cases[2]]}`;
+        if (aux == xWin){
             winner = 'Player';
             console.log('X win');
             showResults(`${winner} wins`);
+            printCase(winner, cases);
         }
-        else if(cases == oWin){
+        else if(aux == oWin){
             winner = 'PC';
             console.log('O win');
             showResults(`${winner} wins`);
+            printCase(winner, cases);
         }
-    })   
+    })
     if (count == 9 && winner == null) {
         winner = 'Tied';
         showResults(`Game ${winner}`);
+        printCase(winner, []);
     } 
+}
+
+function printCase(result, cases){
+    if (result == 'Tied') {
+        blocks.forEach((block)=>{
+            block.setAttribute('style', 'background-color: rgb(134, 194, 218); color: rgb(34, 76, 131);')
+        })
+    }else{
+        cases.forEach(element => {
+            let divToPrint = document.getElementById(`${element}`);
+            if(result == 'Player'){
+                divToPrint.setAttribute('style', 'background-color: rgb(111, 180, 105); color: rgb(24, 110, 17);')
+            }
+            else if(result == 'PC'){
+                divToPrint.setAttribute('style', 'background-color: rgb(238, 137, 137); color: rgb(218, 42, 42);')
+            }
+        });
+    }
 }
 
 function display(selector, block){
@@ -75,7 +98,6 @@ function selectBlock(player, blockSelected){
 function computerPlay(){
     if (emptyPositions.length){
         let computerSelection = emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
-        console.log(computerSelection);
         table[computerSelection] = 'O';
         count++;
         emptyPositions.splice(emptyPositions.indexOf(computerSelection), 1)
@@ -97,7 +119,8 @@ function clearTable(){
     clear.innerHTML = 'Clear';
     blocks.forEach((block)=>{
         if (block.firstChild != null){
-            block.removeChild(block.firstChild)
+            block.removeChild(block.firstChild);
+            block.setAttribute('style', 'background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);');
         }
     })
 }
@@ -108,7 +131,6 @@ blocks.forEach( (block) =>{
         if (table[blockId] == '' && count < 9 && winner == null){
             selectBlock(player1, block);
             computerPlay();
-            console.log(table);
         }
     })
 })
