@@ -13,7 +13,6 @@ const modal = document.querySelector('.modal');
 const resultDiv = document.querySelector('.resultDisplay');
 const clear = document.querySelector('#clearTable');
 const color = document.querySelector('#colorMode');
-const body = document.getElementsByTagName("BODY");
 const link = document.querySelector("a");
 
 function changeTheme(){
