@@ -3,7 +3,8 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color:rgb(255, 255, 255);
+    background-color:white;
+    color: black;
     font-family: 'Poppins', sans-serif;
     margin: 0;
 }
@@ -11,13 +12,11 @@ body{
 a{
     outline: none;
     text-decoration: none;
-    color: rgb(65, 61, 61);
-    /* font-size: 2.5rem; */
+    color: #413D3D;
     font-weight: 600;
 }
 
 .main{
-    background-color:rgb(255, 255, 255);
     width: 50%;
     display: flex;
     justify-content: center;
@@ -25,24 +24,20 @@ a{
 }
 
 .title{
-    background-color:rgb(255, 255, 255);
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black;
     font-size: 35px;
     height: 25%;
 }
 
 .table-div{
-    background-color:rgb(255, 255, 255);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .clearDiv{
-    background-color:rgb(255, 255, 255);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,6 +51,7 @@ button{
     border: none;
     outline: none;
     transition: 0.3s;
+    margin: auto 5px;
 }
 
 button:hover{
@@ -67,7 +63,6 @@ button:hover{
     display: grid;
     grid-template-columns: repeat(3,33.333%);
     grid-template-rows: repeat(3,33.333%);
-    background-color: rgb(255, 255, 255);
     width:30vw;
     height:30vw;
 }
@@ -82,7 +77,6 @@ button:hover{
 .modal{
     display: none;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
     padding-top: 0px;
 }
 
@@ -93,7 +87,6 @@ button:hover{
     flex-direction: column;
     width: 100%;
     height: 5rem;
-    background-color:rgb(255, 255, 255);
 }
 
 .resultDisplay{

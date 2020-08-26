@@ -4,12 +4,40 @@ let player1 = {selector: 'X', name: 'Player'};
 let player2 = {selector: 'O', name: 'PC'}
 let count = 0;
 let winner = null;
+let DarkModeOn = false;
+let borderColor = 'black';
 
 const blocks = document.querySelectorAll('.block')
 const title = document.querySelector('.title');
 const modal = document.querySelector('.modal');
 const resultDiv = document.querySelector('.resultDisplay');
 const clear = document.querySelector('#clearTable');
+const color = document.querySelector('#colorMode');
+const body = document.getElementsByTagName("BODY");
+const link = document.querySelector("a");
+
+function changeTheme(){
+    DarkModeOn = !DarkModeOn;
+    if (DarkModeOn){
+        color.innerHTML = 'Light Mode';
+        document.body.style.backgroundColor = "#1f2637";
+        document.body.style.color = 'white';
+        link.style.color = 'white';
+        borderColor = 'white';
+        blocks.forEach((block) => {
+            block.setAttribute('style', `border: 1px solid ${borderColor};`)
+        });
+    }else{
+        color.innerHTML = 'Dark Mode';
+        document.body.style.backgroundColor = "white";
+        document.body.style.color = 'black';
+        link.style.color = '#413D3D';
+        borderColor = 'black';
+        blocks.forEach((block) => {
+            block.setAttribute('style', `border: 1px solid ${borderColor};`)
+        });
+    }
+}
 
 function check(){
     const xWin = 'X X X';
@@ -51,16 +79,16 @@ function check(){
 function printCase(result, cases){
     if (result == 'Tied') {
         blocks.forEach((block)=>{
-            block.setAttribute('style', 'background-color: rgb(134, 194, 218); color: rgb(34, 76, 131);')
+            block.setAttribute('style', `background-color: rgb(134, 194, 218); color: rgb(34, 76, 131); border: 1px solid ${borderColor};`)
         })
     }else{
         cases.forEach(element => {
             let divToPrint = document.getElementById(`${element}`);
             if(result == 'Player'){
-                divToPrint.setAttribute('style', 'background-color: rgb(111, 180, 105); color: rgb(24, 110, 17);')
+                divToPrint.setAttribute('style', `background-color: rgb(111, 180, 105); color: rgb(24, 110, 17); border: 1px solid ${borderColor};`)
             }
             else if(result == 'PC'){
-                divToPrint.setAttribute('style', 'background-color: rgb(238, 137, 137); color: rgb(218, 42, 42);')
+                divToPrint.setAttribute('style', `background-color: rgb(238, 137, 137); color: rgb(218, 42, 42); border: 1px solid ${borderColor};`)
             }
         });
     }
@@ -120,7 +148,11 @@ function clearTable(){
     blocks.forEach((block)=>{
         if (block.firstChild != null){
             block.removeChild(block.firstChild);
-            block.setAttribute('style', 'background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);');
+        }
+        if(!DarkModeOn){
+            block.setAttribute('style', 'background-color: white; color: black; border: 1px solid black;');
+        }else if(DarkModeOn){
+            block.setAttribute('style', 'background-color: #1f2637; color: white; border: 1px solid white;');
         }
     })
 }
@@ -137,8 +169,10 @@ blocks.forEach( (block) =>{
 
 
 clear.addEventListener('click', clearTable);
+color.addEventListener('click', () => changeTheme());
 
-// Solve cases when both player wins
+
+
 // Change to Object oriented after it works
 
 
