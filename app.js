@@ -10,6 +10,7 @@ const title = document.querySelector('.title');
 const modal = document.querySelector('.modal');
 const playAgain = document.querySelector('#playAgain');
 const resultDiv = document.querySelector('.resultDisplay');
+const clear = document.querySelector('#clearTable');
 
 function check(){
     const xWin = 'X X X';
@@ -89,6 +90,7 @@ function clearTable(){
     emptyPositions = [0,1,2,3,4,5,6,7,8];
     winner = null;
     resultDiv.textContent = '';
+    modal.style.display = 'none';
     blocks.forEach((block)=>{
         if (block.firstChild != null){
             block.removeChild(block.firstChild)
@@ -108,12 +110,7 @@ blocks.forEach( (block) =>{
 })
 
 
-title.addEventListener('click', clearTable);
-
-/*
-footer
-add clear button
-*/
+clear.addEventListener('click', clearTable);
 
 // Change to Object oriented after it works
 

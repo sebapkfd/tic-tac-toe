@@ -1,9 +1,17 @@
 body{
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     background-color:rgb(194, 189, 189);
     font-family: 'Poppins', sans-serif;
     margin: 0;
+}
+
+a{
+    outline: none;
+    text-decoration: none;
+    color: white;
 }
 
 .main{
@@ -32,7 +40,27 @@ body{
     align-items: center;
 }
 
-/* might delete later */
+.clearDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+}
+
+button{
+    height: 2rem;
+    width: 5rem;
+    border-radius: 1rem;
+    border: none;
+    outline: none;
+    transition: 0.3s;
+}
+
+button:hover{
+    background-color: rgb(66, 64, 64);
+    color: rgb(214, 203, 203);
+}
+
 .table{
     display: grid;
     grid-template-columns: repeat(3,33.333%);
