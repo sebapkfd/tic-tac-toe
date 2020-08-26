@@ -12,7 +12,7 @@ a{
     outline: none;
     text-decoration: none;
     color: rgb(65, 61, 61);
-    font-size: 3.5vw;
+    font-size: 2.5rem;
     font-weight: 600;
 }
 
@@ -30,7 +30,7 @@ a{
     justify-content: center;
     align-items: center;
     color: black;
-    height: 5vw;
+    height: 25%;
 }
 
 .table-div{
