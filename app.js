@@ -2,11 +2,14 @@ let table = ['','','','','','','','',''];
 let emptyPositions = [0,1,2,3,4,5,6,7,8];
 let player1 = {selector: 'X', name: 'Player'};
 let player2 = {selector: 'O', name: 'PC'}
-let count = 0;// max: 9
+let count = 0;
 let winner = null;
 
 const blocks = document.querySelectorAll('.block')
 const title = document.querySelector('.title');
+const modal = document.querySelector('.modal');
+const playAgain = document.querySelector('#playAgain');
+const resultDiv = document.querySelector('.resultDisplay');
 
 function check(){
     const xWin = 'X X X';
@@ -24,14 +27,20 @@ function check(){
 
     winCases.forEach((cases) => {
         if (cases == xWin){
-            winner = 'Player'
+            winner = 'Player';
             console.log('X win');
+            showResults(`${winner} wins`);
         }
         else if(cases == oWin){
-            winner = 'PC'
+            winner = 'PC';
             console.log('O win');
+            showResults(`${winner} wins`);
         }
-    })    
+    })   
+    if (count == 9 && winner == null) {
+        winner = 'Tied';
+        showResults(`Game ${winner}`);
+    } 
 }
 
 function display(selector, block){
@@ -41,11 +50,21 @@ function display(selector, block){
     block.appendChild(selectionDiv);
 }
 
+function showResults(winner){
+    modal.style.display = 'block';
+    resultDiv.textContent = winner;
+    playAgain.addEventListener('click', ()=>{
+        clearTable();
+        modal.style.display = 'none';
+    })
+}
+
 function selectBlock(player, blockSelected){
     table[blockSelected.id] = player.selector;
     count++;
     emptyPositions.splice(emptyPositions.indexOf(parseInt(blockSelected.id)), 1)
     display(player.selector, blockSelected);
+    check();
 }
 
 //not using Player2 
@@ -58,6 +77,7 @@ function computerPlay(){
         emptyPositions.splice(emptyPositions.indexOf(computerSelection), 1)
         let blockDiv = document.getElementById(`${computerSelection}`);
         display('O', blockDiv);
+        check();
     }
 }
 
@@ -68,14 +88,13 @@ function clearTable(){
     count = 0;
     emptyPositions = [0,1,2,3,4,5,6,7,8];
     winner = null;
+    resultDiv.textContent = '';
     blocks.forEach((block)=>{
         if (block.firstChild != null){
             block.removeChild(block.firstChild)
         }
     })
 }
-
-
 
 blocks.forEach( (block) =>{
     block.addEventListener('click', ()=> {
@@ -84,7 +103,6 @@ blocks.forEach( (block) =>{
             selectBlock(player1, block);
             computerPlay();
             console.log(table);
-            check();
         }
     })
 })
@@ -92,13 +110,9 @@ blocks.forEach( (block) =>{
 
 title.addEventListener('click', clearTable);
 
-
-
-
 /*
 footer
 add clear button
-block size changing
 */
 
 // Change to Object oriented after it works
