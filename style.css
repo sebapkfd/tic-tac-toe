@@ -35,11 +35,11 @@ body{
 /* might delete later */
 .table{
     display: grid;
-    grid-template-columns: repeat(3,33.3%);
-    grid-template-rows: repeat(3,33.3%);
+    grid-template-columns: repeat(3,33.333%);
+    grid-template-rows: repeat(3,33.333%);
     background-color: rgb(255, 255, 255);
-    height: 420px;
-    width: 60%;
+    width:30vw;
+    height:30vw;
 }
 
 .block{
