@@ -96,7 +96,7 @@ function selectBlock(player, blockSelected){
 
 //not using Player2 
 function computerPlay(){
-    if (emptyPositions.length){
+    if (emptyPositions.length && winner == null){
         let computerSelection = emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
         table[computerSelection] = 'O';
         count++;
@@ -138,7 +138,7 @@ blocks.forEach( (block) =>{
 
 clear.addEventListener('click', clearTable);
 
-
+// Solve cases when both player wins
 // Change to Object oriented after it works
 
 
