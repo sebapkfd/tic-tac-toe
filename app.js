@@ -8,7 +8,6 @@ let winner = null;
 const blocks = document.querySelectorAll('.block')
 const title = document.querySelector('.title');
 const modal = document.querySelector('.modal');
-const playAgain = document.querySelector('#playAgain');
 const resultDiv = document.querySelector('.resultDisplay');
 const clear = document.querySelector('#clearTable');
 
@@ -54,10 +53,14 @@ function display(selector, block){
 function showResults(winner){
     modal.style.display = 'block';
     resultDiv.textContent = winner;
-    playAgain.addEventListener('click', ()=>{
-        clearTable();
-        modal.style.display = 'none';
-    })
+    clear.innerHTML = 'Play again';
+    if(winner == 'Player wins'){
+        resultDiv.setAttribute('style', 'background-color: rgb(111, 180, 105); color: rgb(24, 110, 17);')
+    }else if(winner == 'PC wins'){
+        resultDiv.setAttribute('style', 'background-color: rgb(238, 137, 137); color: rgb(218, 42, 42);')
+    }else if(winner = 'Game Tied'){
+        resultDiv.setAttribute('style', 'background-color: rgb(134, 194, 218); color: rgb(34, 76, 131);')
+    }
 }
 
 function selectBlock(player, blockSelected){
@@ -91,6 +94,7 @@ function clearTable(){
     winner = null;
     resultDiv.textContent = '';
     modal.style.display = 'none';
+    clear.innerHTML = 'Clear';
     blocks.forEach((block)=>{
         if (block.firstChild != null){
             block.removeChild(block.firstChild)
@@ -112,8 +116,8 @@ blocks.forEach( (block) =>{
 
 clear.addEventListener('click', clearTable);
 
-// Change to Object oriented after it works
 
+// Change to Object oriented after it works
 
 
 const player = (selector, name) =>{
