@@ -115,7 +115,7 @@ const game = (() =>{
     let count = 0;
     let winner = null;
     
-    const check = () =>{
+    const check = (player) =>{
         const xWin = 'X X X';
         const oWin = 'O O O';
     
@@ -132,13 +132,13 @@ const game = (() =>{
         AuxCases.forEach((cases)=>{
             let aux = `${table[cases[0]]} ${table[cases[1]]} ${table[cases[2]]}`;
             if (aux == xWin){
-                winner = 'Player';
+                winner = player.name;
                 console.log('X win');
                 interface.showResults(`${winner} wins`);
                 interface.printCase(winner, cases);
             }
             else if(aux == oWin){
-                winner = 'PC';
+                winner = player.name;
                 console.log('O win');
                 interface.showResults(`${winner} wins`);
                 interface.printCase(winner, cases);
@@ -156,7 +156,7 @@ const game = (() =>{
         count++;
         emptyPositions.splice(emptyPositions.indexOf(parseInt(blockSelected.id)), 1)
         interface.display(player.selector, blockSelected);
-        check();
+        check(player);
     }
 
     const computerPlay = () =>{
